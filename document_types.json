@@ -1,0 +1,59 @@
+{
+    "学历证书": {
+        "expression": "contains('学历证书') or contains('学厼证书')"
+    },
+    "学位证书": {
+        "expression": "contains('学位证书')"
+    },
+    "身份证": {
+        "expression": "contains('身份证')"
+    },
+    "银行卡": {
+        "expression": "contains('银行卡')"
+    },
+    "离职证明": {
+        "expression": "contains('离职证明')"
+    },
+    "户口证明": {
+        "expression": "contains('户口证明')"
+    },
+    "体检证明": {
+        "expression": "contains('体检证明') or contains('既往病史')"
+    },
+    "厂纪厂规试题": {
+        "expression": "contains('厂纪厂规试题')"
+    },
+    "职业健康安全培训题": {
+        "expression": "contains('职业健康安全培训题')"
+    },
+    "珠江钢琴企业理念培训试题": {
+        "expression": "contains('珠江钢琴企业理念培训试题')"
+    },
+    "质量与环境意识试题": {
+        "expression": "contains('质量与环境意识试题')"
+    },
+    "劳动合同补充协议": {
+        "expression": "contains('劳动合同补充协议')"
+    },
+    "计划生育人员信息采集卡": {
+        "expression": "contains('计划生育') and contains('信息采集卡')"
+    },
+    "新入职员工须知": {
+        "expression": "contains('新入职员工须知')"
+    },
+    "劳动关系及档案声明": {
+        "expression": "contains('劳动关系及档案声明')"
+    },
+    "入职登记表": {
+        "expression": "contains('入职登记表') or (contains('入职') and contains('登记表'))"
+    },
+    "知识产权入职声明": {
+        "expression": "contains('不将他人的商业秘密用于本公司')"
+    },
+    "廉洁承诺书": {
+        "expression": "contains('党风廉政建设')"
+    },
+    "特定文档": {
+        "expression": "contains('关键词1') and not contains('关键词2')"
+    }
+}
