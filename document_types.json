@@ -36,7 +36,7 @@
         "expression": "contains('劳动合同补充协议')"
     },
     "计划生育人员信息采集卡": {
-        "expression": "contains('计划生育') and contains('信息采集卡')"
+        "expression": "contains('计划生育信息采集卡')"
     },
     "新入职员工须知": {
         "expression": "contains('新入职员工须知')"
@@ -45,7 +45,7 @@
         "expression": "contains('劳动关系及档案声明')"
     },
     "入职登记表": {
-        "expression": "contains('入职登记表') or (contains('入职') and contains('登记表'))"
+        "expression": "contains('入职登记表') or (contains('入职登记表'))"
     },
     "知识产权入职声明": {
         "expression": "contains('不将他人的商业秘密用于本公司')"
