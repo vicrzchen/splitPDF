@@ -219,12 +219,14 @@ def process_pdf(args):
     ocr = PaddleOCR(use_angle_cls=True, lang='ch')
 
     # 第一次遍历：识别每页的文档类型
+    previous_doc_type = None
     for i, image in enumerate(images):
         logger.info(f"处理第 {i + 1} 页")
 
         if is_blank_page(image):
             logger.info(f"第 {i + 1} 页是空白页")
             page_types.append("空白页")
+            previous_doc_type = "空白页"
             continue
 
         try:
@@ -237,7 +239,16 @@ def process_pdf(args):
             logger.debug(f"清理后的文本：{text_cleaned}")
 
             doc_type = find_best_match(text_cleaned, document_types)
+            
+            if doc_type == "其他":
+                if previous_doc_type and previous_doc_type != "空白页":
+                    doc_type = previous_doc_type
+                    logger.info(f"第 {i + 1} 页无法判断类型，归类为前一页类型：{doc_type}")
+                else:
+                    logger.info(f"第 {i + 1} 页无法判断类型，归类为其他")
+            
             page_types.append(doc_type)
+            previous_doc_type = doc_type
         except Exception as e:
             logger.error(f"OCR 处理页面 {i + 1} 时出错：{e}")
             page_types.append("其他")
