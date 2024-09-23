@@ -1,1 +1,4 @@
 .conda/
+process.log
+output/
+kits/__pycache__/
