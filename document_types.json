@@ -1,6 +1,6 @@
 {
     "学历证书": {
-        "expression": "similar('学历证书', 0.8) or similar('学厼证书', 0.8) or similar('成绩合格', 0.8) or similar('准予毕业', 0.8)"
+        "expression": "similar('学历证书', 0.8) or similar('学厼证书', 0.8) or similar('成绩合格', 0.8) or similar('准予毕业', 0.8) or similar('毕业证书', 0.8)"
     },
     "学位证书": {
         "expression": "similar('学位证书', 0.8) or similar('中华人民共和国学位条例', 0.8)"
@@ -9,22 +9,25 @@
         "expression": "similar('公民身份证', 0.8) or similar('居民身份证', 0.8)"
     },
     "银行卡": {
-        "expression": "contains('网上银行') or contains('UnionPay') or contains('ICBC') or contains('持卡人签名')"
+        "expression": "similar('网上银行', 1) or similar('UnionPay', 1) or similar('ICBC', 1) or similar('持卡人签名',1) or similar('6212',1)"
     },
     "离职证明": {
         "expression": "similar('离职证明', 0.8) or similar('离职手续已办理完毕', 0.8) or similar('正式办理离职等相关手续', 0.8)"
     },
-    "户口证明": {
-        "expression": "similar('户口证明', 0.8)"
-    },
     "体检证明": {
-        "expression": "similar('体检证明', 0.8) or similar('既往病史', 0.8)"
+        "expression": "similar('体检证明', 0.8)"
+    },
+    "离职声明及档案声明": {
+        "expression": "similar('未能向公司提供失业证明', 0.8) or similar('未能向公司提供并递交个人档案', 0.8)"
     },
     "厂纪厂规试题": {
         "expression": "similar('厂纪厂规试题', 0.8)"
     },
     "职业健康安全培训题": {
         "expression": "similar('职业健康安全培训题', 0.8)"
+    },
+    "消防安全知识培训题": {
+        "expression": "similar('消防安全知识培训题', 0.8)"
     },
     "珠江钢琴企业理念培训试题": {
         "expression": "similar('珠江钢琴企业理念培训试题', 0.8)"
@@ -56,9 +59,6 @@
     "既往病史范围确定": {
         "expression": "similar('既往病史参考范围', 0.8)"
     },
-    "特定文档": {
-        "expression": "contains('关键词1') and not contains('关键词2')"
-    },
     "技能证书": {
         "expression": "similar('职业技能鉴定', 0.8) or similar('技能考核成绩', 0.8) or similar('专业技术资格', 0.8)"
     },
@@ -66,6 +66,9 @@
         "expression": "similar('社会保险个人参保证明', 0.8) or similar('社会保险参保证明', 0.8)"
     },
     "户口": {
-        "expression": "contains('户别') or contains('户号') or contains('户主姓名') or contains('常住人口登记卡')"
+        "expression": "similar('户别', 1) or similar('户号', 1) or similar('户主姓名', 1) or similar('常住人口登记卡', 1) or similar('户口专用', 1)"
+    },
+    "质量意识": {
+        "expression": "similar('质量意识试题', 0.8)"
     }
 }
