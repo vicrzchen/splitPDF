@@ -27,6 +27,13 @@ def setup_logging():
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
 
+    # 增加flush方法
+    def flush():
+        for handler in logger.handlers:
+            handler.flush()
+
+    logger.flush = flush
+
     return logger
 
 logger = setup_logging()

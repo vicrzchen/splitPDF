@@ -2,3 +2,6 @@
 process.log
 output/
 kits/__pycache__/
+testdata/
+*.log
+input/

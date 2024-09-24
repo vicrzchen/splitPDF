@@ -1,6 +1,5 @@
 import os
 import json
-from multiprocessing import Pool
 from kits.ocr_processor import process_pdf
 from kits.log_processor import logger
 
@@ -18,14 +17,11 @@ def main():
 
     pdf_files = [os.path.join(input_dir, f) for f in os.listdir(input_dir) if f.lower().endswith('.pdf')]
 
-    # 使用多进程加速处理
-    pool_args = [(pdf_path, output_dir, document_types) for pdf_path in pdf_files]
-    with Pool(processes=4) as pool:
-        pool.map(process_pdf, pool_args)
+    # 使用单线程处理
+    for pdf_path in pdf_files:
+        process_pdf((pdf_path, output_dir, document_types))
 
 if __name__ == '__main__':
     main()
     # 手动刷新日志流，确保日志写入文件
-
-    logger.info("程序结束")
     logger.flush()

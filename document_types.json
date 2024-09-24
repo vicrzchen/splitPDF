@@ -1,59 +1,71 @@
 {
     "学历证书": {
-        "expression": "contains('学历证书') or contains('学厼证书')"
+        "expression": "similar('学历证书', 0.8) or similar('学厼证书', 0.8) or similar('成绩合格', 0.8) or similar('准予毕业', 0.8)"
     },
     "学位证书": {
-        "expression": "contains('学位证书')"
+        "expression": "similar('学位证书', 0.8) or similar('中华人民共和国学位条例', 0.8)"
     },
     "身份证": {
-        "expression": "contains('身份证')"
+        "expression": "similar('公民身份证', 0.8) or similar('居民身份证', 0.8)"
     },
     "银行卡": {
-        "expression": "contains('银行卡')"
+        "expression": "contains('网上银行') or contains('UnionPay') or contains('ICBC') or contains('持卡人签名')"
     },
     "离职证明": {
-        "expression": "contains('离职证明')"
+        "expression": "similar('离职证明', 0.8) or similar('离职手续已办理完毕', 0.8) or similar('正式办理离职等相关手续', 0.8)"
     },
     "户口证明": {
-        "expression": "contains('户口证明')"
+        "expression": "similar('户口证明', 0.8)"
     },
     "体检证明": {
-        "expression": "contains('体检证明') or contains('既往病史')"
+        "expression": "similar('体检证明', 0.8) or similar('既往病史', 0.8)"
     },
     "厂纪厂规试题": {
-        "expression": "contains('厂纪厂规试题')"
+        "expression": "similar('厂纪厂规试题', 0.8)"
     },
     "职业健康安全培训题": {
-        "expression": "contains('职业健康安全培训题')"
+        "expression": "similar('职业健康安全培训题', 0.8)"
     },
     "珠江钢琴企业理念培训试题": {
-        "expression": "contains('珠江钢琴企业理念培训试题')"
+        "expression": "similar('珠江钢琴企业理念培训试题', 0.8)"
     },
     "质量与环境意识试题": {
-        "expression": "contains('质量与环境意识试题')"
+        "expression": "similar('质量与环境意识试题', 0.8)"
     },
     "劳动合同补充协议": {
-        "expression": "contains('劳动合同补充协议')"
+        "expression": "similar('保密资料全部交还甲方', 0.8) or similar('创造发明属职务发明', 0.8)"
     },
     "计划生育人员信息采集卡": {
-        "expression": "contains('计划生育信息采集卡')"
+        "expression": "similar('计划生育人员信息采集卡', 0.8)"
     },
     "新入职员工须知": {
-        "expression": "contains('新入职员工须知')"
+        "expression": "similar('新入职员工须知', 0.8)"
     },
     "劳动关系及档案声明": {
-        "expression": "contains('劳动关系及档案声明')"
+        "expression": "similar('劳动关系及档案声明', 0.8)"
     },
     "入职登记表": {
-        "expression": "contains('入职登记表') or (contains('入职登记表'))"
+        "expression": "similar('入职登记表', 0.8) or (similar('入职登记表', 0.8))"
     },
     "知识产权入职声明": {
-        "expression": "contains('不将他人的商业秘密用于本公司')"
+        "expression": "similar('不将他人的商业秘密用于本公司', 0.8) or similar('不与任何第三方有知识产权方面的纠纷', 0.8)"
     },
     "廉洁承诺书": {
-        "expression": "contains('党风廉政建设')"
+        "expression": "similar('党风廉政建设', 0.8)"
+    },
+    "既往病史范围确定": {
+        "expression": "similar('既往病史参考范围', 0.8)"
     },
     "特定文档": {
         "expression": "contains('关键词1') and not contains('关键词2')"
+    },
+    "技能证书": {
+        "expression": "similar('职业技能鉴定', 0.8) or similar('技能考核成绩', 0.8) or similar('专业技术资格', 0.8)"
+    },
+    "社保证明": {
+        "expression": "similar('社会保险个人参保证明', 0.8) or similar('社会保险参保证明', 0.8)"
+    },
+    "户口": {
+        "expression": "contains('户别') or contains('户号') or contains('户主姓名') or contains('常住人口登记卡')"
     }
 }

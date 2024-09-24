@@ -38,6 +38,7 @@ def process_pdf(args):
         if is_blank_page(image):
             logger.info(f"第 {i + 1} 页是空白页")
             page_types.append("空白页")
+            page_info.append([i + 1, "空白页"])  # 将空白页信息添加到 page_info
             previous_doc_type = "空白页"
             continue
 
@@ -92,9 +93,12 @@ def process_pdf(args):
             for page_num in pages_for_current_doc:
                 page_info.append([page_num + 1, output_filename])
 
+    # 按页码排序 page_info
+    page_info.sort(key=lambda x: x[0])
+
     # 保存 CSV 文件
     csv_filename = os.path.join(output_dir, f"{pdf_name}_page_info.csv")
-    with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
+    with open(csv_filename, 'w', newline='', encoding='utf-8-sig') as csvfile:  # 修改编码为 utf-8-sig
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['页码', '文件名'])
         csv_writer.writerows(page_info)

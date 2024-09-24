@@ -27,16 +27,48 @@ def evaluate_expression(expression, text):
     - 括号 ()
     - contains('关键词')
     - percentage('关键词', 阈值)
+    - similar('关键词', 相似度阈值)
     """
     # 定义包含函数，检查关键词是否在文本中
     def contains(keyword):
-        return keyword in text
+        logger.debug(f"检查关键词 '{keyword}' 是否在文本中")
+        result = keyword in text
+        logger.debug(f"关键词 '{keyword}' {'在' if result else '不在'}文本中")
+        return result
 
     # 定义百分比函数，检查关键词在文本中的出现频率
     def percentage(keyword, threshold):
+        logger.debug(f"检查关键词 '{keyword}' 在文本中的出现频率是否超过阈值 {threshold}%")
         word_count = len(text.split())
         keyword_count = text.count(keyword)
-        return (keyword_count / word_count) * 100 >= threshold
+        percentage = (keyword_count / word_count) * 100
+        result = percentage >= threshold
+        logger.debug(f"关键词 '{keyword}' 在文本中的出现频率为 {percentage:.2f}%，{'超过' if result else '未超过'}阈值 {threshold}%")
+        return result
+
+    # 定义相似度函数，检查关键词与文本中词语的相似度
+    def similar(keyword, threshold):
+        logger.debug(f"检查关键词 '{keyword}' 与文本中词语的相似度是否超过阈值 {threshold}")
+        # 对关键词进行分词
+        keyword_words = jieba.lcut(keyword)
+        # 在原始文本中查找关键词
+        start = 0
+        while True:
+            match_index = text.find(keyword_words[0], start)
+            if match_index == -1:
+                break
+            end_index = match_index + len(keyword)
+            if text[match_index:end_index] == keyword:
+                logger.debug(f"关键词 '{keyword}' 在文本中完全匹配")
+                return True
+            ratio = levenshtein_ratio(keyword, text[match_index:end_index])
+            logger.debug(f"关键词 '{keyword}' 与文本片段 '{text[match_index:end_index]}' 的相似度为 {ratio:.2f}")
+            if ratio >= threshold:
+                logger.debug(f"关键词 '{keyword}' 与文本片段 '{text[match_index:end_index]}' 的相似度超过阈值 {threshold}")
+                return True
+            start = match_index + len(keyword_words[0])
+        logger.debug(f"关键词 '{keyword}' 与文本中词语的相似度均未超过阈值 {threshold}")
+        return False
 
     # 定义允许的节点类型
     allowed_nodes = (
@@ -58,7 +90,7 @@ def evaluate_expression(expression, text):
             raise ValueError(f"表达式包含不允许的节点：{ast.dump(subnode)}")
 
     # 定义安全的全局和局部命名空间
-    safe_globals = {'contains': contains, 'percentage': percentage, '__builtins__': None}
+    safe_globals = {'contains': contains, 'percentage': percentage, 'similar': similar, '__builtins__': None}
     safe_locals = {}
 
     # 评估表达式
@@ -69,6 +101,27 @@ def evaluate_expression(expression, text):
         result = False
 
     return result
+
+def levenshtein_ratio(s1, s2):
+    """计算两个字符串的编辑距离相似度"""
+    m, n = len(s1), len(s2)
+    if m < n:
+        return levenshtein_ratio(s2, s1)
+
+    if n == 0:
+        return 1.0
+
+    previous_row = range(n + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+
+    return (n - previous_row[-1]) / n
 
 def find_best_match(text, document_types):
     """根据表达式匹配文档类型"""
